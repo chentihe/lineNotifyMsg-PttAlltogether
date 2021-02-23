@@ -14,7 +14,7 @@ def scraper(token):
     for entry in soup.select(' .r-ent'):
         if ('徵男' in entry.select(' .title')[0].text) and (entry.select('.date')[0].text.strip() == timeString):
             headers = {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
             params = {'message': entry.select(' .title')[0].text + '\n' +
