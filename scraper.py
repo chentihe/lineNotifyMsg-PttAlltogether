@@ -2,13 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
-rs = requests.session()
-response = rs.get('https://www.ptt.cc/bbs/Alltogether/index.html')
-soup = BeautifulSoup(response.text, 'html.parser')
-local_time = time.localtime()
-timeString = time.strftime('%m/%d', local_time) #顯示 月/日
-
 def scraper(token):
+    rs = requests.session()
+    response = rs.get('https://www.ptt.cc/bbs/Alltogether/index.html')
+    soup = BeautifulSoup(response.text, 'html.parser')
+    local_time = time.localtime()
+    timeString = time.strftime('%m/%d', local_time) #顯示 月/日
     if timeString[0] == '0':
         timeString = timeString[1:] # 讓 月/日格式和ptt一樣
     for entry in soup.select(' .r-ent'):
