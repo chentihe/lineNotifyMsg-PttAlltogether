@@ -23,7 +23,7 @@ def scraper():
     if timeString[0] == '0':
         timeString = timeString[1:] # 讓 月/日格式和ptt一樣
 
-    for _ in range(5):
+    for _ in range(5): # 搜尋歐兔板前五頁
         response = rs.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
         previousPage = soup.select('div.btn-group.btn-group-paging a')[1]['href']
@@ -31,7 +31,7 @@ def scraper():
 
         for target in soup.select('.r-ent'):
             if ('徵男' in target.select(' .title')[0].text) and (target.select('.date')[0].text.strip() == timeString):
-                
+                # 徵男文 ＆ 當天日期
                 title = target.find(class_='title').text.strip()
                 link = 'https://www.ptt.cc' + target.find('a').get('href')
                 msg = title + '\n' + link
