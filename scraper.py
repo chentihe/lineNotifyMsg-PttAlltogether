@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import time
 from random import randrange
 
-token = 'D7fZ04VxabHBFobJN7IxDN9BwNOc2HkboyumpcFMGDm'
+token = 'your_token'
 def lineNotifyMsg(token, msg):
     headers = {
     'Authorization': 'Bearer ' + token,
