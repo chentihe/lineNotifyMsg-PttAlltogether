@@ -11,7 +11,7 @@ def lineNotifyMsg(token, msg):
     }
     payload = {'message': msg}
     r = requests.post('https://notify-api.line.me/api/notify',
-                    headers=headers, params=params)
+                    headers=headers, params=payload)
     return r.status_code
 
 def scraper():
