@@ -1,6 +1,18 @@
 import requests
 from bs4 import BeautifulSoup
 import time
+from random import randrange
+
+token = 'D7fZ04VxabHBFobJN7IxDN9BwNOc2HkboyumpcFMGDm'
+def lineNotifyMsg(token, msg):
+    headers = {
+    'Authorization': 'Bearer ' + token,
+    'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    payload = {'message': msg}
+    r = requests.post('https://notify-api.line.me/api/notify',
+                    headers=headers, params=params)
+    return r.status_code
 
 def scraper():
     rs = requests.session()
@@ -22,20 +34,10 @@ def scraper():
                 
                 title = target.find(class_='title').text.strip()
                 link = 'https://www.ptt.cc' + target.find('a').get('href')
+                msg = title + '\n' + link
+                lineNotifyMsg(token, msg)
 
-                headers = {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-                params = {'message': title + '\n' +
-                'https://www.ptt.cc' + link}
-                r = requests.post('https://notify-api.line.me/api/notify',
-                                    headers=headers, params=params)
-                return r.status_code
-        time.sleep(10)
-
-
-if __name__ == '__main__':
-    token = 'D7fZ04VxabHBFobJN7IxDN9BwNOc2HkboyumpcFMGDm'
+        sleep_time = randrange(1, 60)
+        time.sleep(sleep_time)
 
 scraper()
